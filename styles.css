@@ -99,3 +99,27 @@ body {
     padding: 10px;  /* 여백 추가 (선택사항) */
     box-sizing: border-box;  /* 테두리와 패딩 포함 */
 }
+
+/* 받은 메시지 영역 스크롤 설정 */
+.received_msg {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    
+    /* 핵심: 높이를 고정하고 스크롤을 허용 */
+    height: 300px;           /* 높이는 원하시는 만큼 조절 (예: 50vh 등) */
+    overflow-y: auto;        /* 내용이 넘치면 세로 스크롤 생성 */
+    
+    /* 모바일 터치 스크롤 부드럽게 */
+    -webkit-overflow-scrolling: touch; 
+}
+
+/* (선택사항) 삐삐 화면 글자 스타일 */
+#screen_display {
+    font-family: 'Courier New', monospace;
+    font-size: 20px;
+    padding: 0 10px;
+    line-height: 2.5; /* 세로 정렬 맞춤 */
+}
