@@ -1,3 +1,5 @@
+/* styles.css */
+
 body {
     display: flex;
     flex-direction: column;
@@ -13,6 +15,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* 전체 폭을 조금 넓혀서 긴 메시지가 잘 보이게 함 */
+    width: 320px; 
 }
 
 .common-display {
@@ -23,7 +27,7 @@ body {
 }
 
 .sender-id {
-    width: 260px;
+    width: 100%; /* 부모 너비에 맞춤 */
     height: 40px;
     background-color: #222;
     color: rgb(228, 226, 216);
@@ -31,23 +35,36 @@ body {
     font-size: 20px;
 }
 
+/* [핵심 수정] 6칸 그리드(Grid) 제거 -> 유동적인 박스로 변경 */
 .pager-screen {
-    display: grid;
-    grid-template-columns: repeat(6, 40px);
-    gap: 4px;
+    display: flex;             /* Grid 대신 Flex 사용 */
+    align-items: center;       /* 세로 중앙 정렬 */
+    justify-content: flex-start; /* 왼쪽부터 글자 채움 */
+    
+    width: 100%;               /* 너비 100% */
+    min-height: 60px;          /* 최소 높이 확보 */
+    box-sizing: border-box;    /* 패딩 포함 크기 계산 */
+    
     background-color: black;
     padding: 10px;
     margin-bottom: 20px;
+    
+    /* 긴 글자가 넘치지 않게 줄바꿈 허용은 내부 div에서 처리 */
 }
 
-.segment {
-    width: 40px;
-    height: 60px;
-    background-color: #222;
-    border-radius: 3px;
-    opacity: 0.3;
-    color: rgb(228, 226, 216);
-    font-size: 32px;
+/* 기존 .segment 클래스는 이제 사용하지 않으므로 삭제해도 무방 */
+
+/* 화면 내부 텍스트 스타일 */
+#screen_display, .pager-screen .common-display {
+    color: rgb(228, 226, 216); /* 글자색 (형광 녹색 계열) */
+    font-family: 'Courier New', monospace;
+    font-size: 20px;
+    width: 100%;
+    
+    /* 긴 텍스트 처리 */
+    white-space: normal;       /* 줄바꿈 허용 */
+    word-break: break-all;     /* 단어 중간이라도 줄바꿈 */
+    text-align: left;          /* 왼쪽 정렬 */
 }
 
 .common-input {
@@ -56,6 +73,8 @@ body {
     padding: 8px;
     font-size: 16px;
     margin-bottom: 10px;
+    width: 100%; /* 너비 꽉 채우기 */
+    box-sizing: border-box;
 }
 
 .common-input:focus {
@@ -63,56 +82,46 @@ body {
     border-color: rgb(74, 77, 74);
 }
 
-.input-field {
-    width: 220px;
-}
-
-.receiver-select {
-    width: 240px;
-    margin-bottom: 20px;
-}
-
 .input-container {
     display: flex;
     align-items: center;
+    width: 100%;
+    gap: 10px; /* 입력창과 버튼 사이 간격 */
+}
+
+.input-field {
+    flex-grow: 1; /* 남은 공간 모두 차지 */
+}
+
+.receiver-select {
+    width: 100%;
 }
 
 .send-button {
-    margin-left: 10px;
     padding: 8px 16px;
     border: none;
     border-radius: 5px;
     background-color: rgb(197, 204, 197);
     color: #222;
     cursor: pointer;
+    white-space: nowrap; /* 버튼 글자 줄바꿈 방지 */
 }
 
 .send-button:hover {
     background-color: rgb(74, 77, 74);
 }
 
-
-/* 받은 메시지 영역 스크롤 설정 */
+/* 받은 메시지 영역 */
 .received_msg {
     margin-top: 15px;
     padding: 10px;
     background-color: #f1f1f1;
     border-radius: 8px;
     border: 1px solid #ddd;
-    
-    /* 핵심: 높이를 고정하고 스크롤을 허용 */
-    height: 300px;           /* 높이는 원하시는 만큼 조절 (예: 50vh 등) */
-    overflow-y: auto;        /* 내용이 넘치면 세로 스크롤 생성 */
-    
-    /* 모바일 터치 스크롤 부드럽게 */
+    width: 100%; /* 너비 꽉 채우기 */
+    box-sizing: border-box;
+
+    height: 300px;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch; 
 }
-
-/* (선택사항) 삐삐 화면 글자 스타일 */
-#screen_display {
-    font-family: 'Courier New', monospace;
-    font-size: 20px;
-    padding: 0 10px;
-    line-height: 2.5; /* 세로 정렬 맞춤 */
-}
-
